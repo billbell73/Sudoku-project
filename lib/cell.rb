@@ -8,4 +8,16 @@ class Cell
 		0
 	end
 
+	def candidates
+		[]
+	end
+
+	def neighbours grid
+		grid.cells
+		[]
+	end
+
+
+
+
 end
