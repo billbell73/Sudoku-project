@@ -10,28 +10,28 @@ describe Cell do
 		expect(cell.filled_out?).to be_true
 	end
 
-	it 'can tell candidate numbers when empty' do
+	xit 'can tell candidate numbers when empty' do
 		expect(cell.candidates).to be_instance_of Array
 	end
 
-	it 'can tell it\'s neighbours' do
-		grid = double :grid, cells: [], transpose: :banana
+	xit 'can tell it\'s neighbours' do
+		grid = double :grid, cells: [2,3,4], transpose: [[2],[3],[4]]
 		expect(cell.neighbours grid).to be_instance_of Array
 	end
 
 	it 'can get the full grid' do
 		expect(grid).to receive(:cells)
-		cell.get_grid grid
+		cell.get_grid_for grid
 	end
 
 	it 'returns the values of cells in the same row' do
-		full_grid = [[0,0,1],[2,3,4],[5,0,0]]
-		expect(cell.values_in_same_row full_grid).to eq [0,0,1]
+		grid = [[0,0,1],[2,3,4],[5,0,0]]
+		expect(cell.values_in_same_row grid).to eq [0,0,1]
 	end
 
 	it 'returns the values of cells in the same column' do
-		full_grid = [[0,0,1],[2,3,4],[5,0,0]]
-		expect(cell.values_in_same_column full_grid).to eq [0,2,5]
+		grid = [[0,0,1],[2,3,4],[5,0,0]]
+		expect(cell.values_in_same_column grid).to eq [0,2,5]
 	end
 
 	it 'can tell its square number if it is at index [0][0]' do
@@ -52,14 +52,34 @@ describe Cell do
 		expect(cell.square_number_of 5, 3).to eq 4
 	end
 
-	xit 'returns the values of cells in the same square' do
-		full_grid = [[0,0,1,9],[2,3,4,9],[5,0,0,9]]
-		expect(cell.values_in_same_square full_grid).to eq [[0,0,1],[2,3,4],[5,0,0]]
+	it 'returns indices of cells in same square' do
+		expect(cell.indices_of_cells_in_same_square).to eq [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]
 	end
 
-	it 'returns indices of cells in same square' do
-		expect(cell.indices_of_cells_in_same_square).to eq []
+	it 'returns indices of cells in same square, different example' do
+		cell = Cell.new(0, 6, 8)
+		expect(cell.indices_of_cells_in_same_square).to eq [[6, 6], [6, 7], [6, 8], [7, 6], [7, 7], [7, 8], [8, 6], [8, 7], [8, 8]]
 	end
+
+ 	it 'knows value at for a given pair of indices' do
+ 		expect(cell.value_at_indices(2,0,[[0,0,1],[2,3,4],[5,0,0]])).to eq 5
+ 	end
+
+ 	it 'knows value for a different given pair of indices' do
+ 		expect(cell.value_at_indices(2,3,[[0,0,1,9],[2,3,4,9],[5,0,0,9]])).to eq 9
+ 	end
+
+ 	it 'returns the values of cells in the same square' do
+		grid = [[0,0,1,9],[2,3,4,9],[5,0,0,9]]
+		expect(cell.values_in_same_square grid).to eq [0, 0, 1, 2, 3, 4, 5, 0, 0]
+	end
+
+	it 'return the values of cells in same square, different example' do
+		cell = Cell.new(7,2,8)
+		grid = [[0,0,1,9,3,4,7,7,7],[2,3,4,9,3,4,7,7,7],[5,0,0,9,3,4,7,7,7]]
+		expect(cell.values_in_same_square grid).to eq [7, 7, 7, 7, 7, 7, 7, 7, 7]
+	end
+
 
 
 
@@ -71,14 +91,14 @@ describe Cell do
 
 ###
 
-	it 'test on neighbours method' do
-		grid_object = double :grid, cells: [[0,0,1],[2,3,4],[5,0,0]]
-		expect(cell.neighbours grid_object).to eq [[0,0,1],[0,2,5]]
-	end
+	# it 'test on neighbours method' do
+	# 	grid_object = double :grid, cells: [[0,0,1],[2,3,4],[5,0,0]]
+	# 	expect(cell.neighbours grid_object).to eq [[0,0,1],[0,2,5]]
+	# end
 
-	xit 'can tell it\'s neighbours include 5' do
-
-		# expect(neighbour_finder grid).to return Array
+	it 'can tell it\'s neighbours include 5' do
+		grid = [[0,0,1],[2,3,4],[5,0,0]]
+		expect(cell.neighbours(grid).include?(5)).to be_true
 	end
 
 end
