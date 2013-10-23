@@ -1,9 +1,9 @@
 class Cell
 
-	def initialize(value, row, column)
+	def initialize(value, y_coordinate, x_coordinate)
 		@value = value
-		@row = row
-		@column = column
+		@y_coordinate = y_coordinate
+		@x_coordinate = x_coordinate
 	end
 
 	def filled_out?
@@ -16,9 +16,8 @@ class Cell
 
 	def neighbours grid_object
 		full_grid = get_grid grid_object
-		#logic which iterates through array choosing cells in same array and cells at same index in other array
 		neighbours_values = []
-		neighbours_values << (values_in_same_row(full_grid))        #full_grid[@row]
+		neighbours_values << (values_in_same_row(full_grid))     
 		neighbours_values << (values_in_same_column(full_grid))
 	end
 
@@ -26,18 +25,32 @@ class Cell
 		grid_object.cells
 	end
 
-	# #pass full_grid and POSITION?? and works out neighbours
-	# def neighbour_finder full_grid
-	# 	# neighbours_values = []
-	# 	# neighbours_values << full_grid[0]
-	# end
-
 	def values_in_same_row full_grid
-		full_grid[@row]
+		full_grid[@y_coordinate]
 	end
 
 	def values_in_same_column full_grid
-		full_grid.transpose[@column]
+		full_grid.transpose[@x_coordinate]
 	end
+
+	def values_in_same_square full_grid
+		# full_grid.select do |x_coordinate|
+		# 	puts x_coordinate
+		# 	true
+
+      # x_coordinate.each_index do |y_coordinate|
+      	#square_number_of_cell == square_number_of(y_coordinate, x_coordinate)
+       #end
+    # end
+	end
+
+	def square_number_of_cell
+		(@x_coordinate/3) + ((@y_coordinate/3)*3)
+	end
+
+	def square_number_of y_coordinate, x_coordinate
+		(x_coordinate/3) + ((y_coordinate/3)*3)
+	end
+
 
 end
