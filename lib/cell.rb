@@ -33,16 +33,34 @@ class Cell
 		full_grid.transpose[@x_coordinate]
 	end
 
-	def values_in_same_square full_grid
-		# full_grid.select do |x_coordinate|
-		# 	puts x_coordinate
-		# 	true
+	# def values_in_same_square full_grid
+	# 	full_grid.each_with_index do |y_coordinate|
+	# 		# full_grid.each do |
 
-      # x_coordinate.each_index do |y_coordinate|
-      	#square_number_of_cell == square_number_of(y_coordinate, x_coordinate)
-       #end
-    # end
+	# 		puts y_coordinate
+	# 		true
+
+ #      # x_coordinate.each_index do |y_coordinate|
+ #      	#square_number_of_cell == square_number_of(y_coordinate, x_coordinate)
+ #       #end
+ #    end
+	# end
+
+	def indices_of_cells_in_same_square
+		indices_of_square_mates = []
+		(0..8).each do | y_coordinate |
+			# puts y_coordinate
+			(0..8).each do | x_coordinate |
+			# puts x_coordinate
+				if square_number_of(y_coordinate, x_coordinate) == square_number_of_cell
+					indices_of_square_mates << [y_coordinate, x_coordinate]
+				end
+			end
+		end
+		indices_of_square_mates
 	end
+
+
 
 	def square_number_of_cell
 		(@x_coordinate/3) + ((@y_coordinate/3)*3)

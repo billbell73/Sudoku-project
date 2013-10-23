@@ -52,9 +52,13 @@ describe Cell do
 		expect(cell.square_number_of 5, 3).to eq 4
 	end
 
-	it 'returns the values of cells in the same square' do
+	xit 'returns the values of cells in the same square' do
 		full_grid = [[0,0,1,9],[2,3,4,9],[5,0,0,9]]
 		expect(cell.values_in_same_square full_grid).to eq [[0,0,1],[2,3,4],[5,0,0]]
+	end
+
+	it 'returns x indices of cells in same square' do
+		expect(cell.indices_of_cells_in_same_square).to eq []
 	end
 
 
