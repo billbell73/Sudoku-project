@@ -19,6 +19,7 @@ class Cell
 		#logic which iterates through array choosing cells in same array and cells at same index in other array
 		neighbours_values = []
 		neighbours_values << (values_in_same_row(full_grid))        #full_grid[@row]
+		neighbours_values << (values_in_same_column(full_grid))
 	end
 
 	def get_grid grid_object
@@ -35,6 +36,8 @@ class Cell
 		full_grid[@row]
 	end
 
-
+	def values_in_same_column full_grid
+		full_grid.transpose[@column]
+	end
 
 end

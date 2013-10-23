@@ -14,7 +14,7 @@ describe Cell do
 	end
 
 	it 'can tell it\'s neighbours' do
-		grid = double :grid, cells: :banana
+		grid = double :grid, cells: [], transpose: :banana
 		expect(cell.neighbours grid).to be_instance_of Array
 	end
 
@@ -23,7 +23,7 @@ describe Cell do
 		cell.get_grid grid
 	end
 
-	xit 'can tell it\s neighbours include 5' do
+	xit 'can tell it\'s neighbours include 5' do
 
 		# expect(neighbour_finder grid).to return Array
 	end
@@ -35,7 +35,17 @@ describe Cell do
 
 	it 'test on neighbours method' do
 		grid_object = double :grid, cells: [[0,0,1],[2,3,4],[5,0,0]]
-		expect(cell.neighbours grid_object).to eq [[0,0,1]]
+		expect(cell.neighbours grid_object).to eq [[0,0,1],[0,2,5]]
+	end
+
+	it 'returns the values of cells in the same column' do
+		full_grid = [[0,0,1],[2,3,4],[5,0,0]]
+		expect(cell.values_in_same_column full_grid).to eq [0,2,5]
+	end
+
+	xit 'returns the values of cells in the same square' do
+		full_grid = [[0,0,1,9],[2,3,4,9],[5,0,0,9]]
+		expect(cell.values_in_same_square full_grid).to eq 
 	end
 
 end
