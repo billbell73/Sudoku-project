@@ -49,9 +49,9 @@ class Cell
 	def indices_of_cells_in_same_square
 		indices_of_square_mates = []
 		(0..8).each do | y_coordinate |
-			# puts y_coordinate
+			# puts "y: #{y_coordinate}"
 			(0..8).each do | x_coordinate |
-			# puts x_coordinate
+			# puts "x: #{x_coordinate}"
 				if square_number_of(y_coordinate, x_coordinate) == square_number_of_cell
 					indices_of_square_mates << [y_coordinate, x_coordinate]
 				end

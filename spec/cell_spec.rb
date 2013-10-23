@@ -57,7 +57,7 @@ describe Cell do
 		expect(cell.values_in_same_square full_grid).to eq [[0,0,1],[2,3,4],[5,0,0]]
 	end
 
-	it 'returns x indices of cells in same square' do
+	it 'returns indices of cells in same square' do
 		expect(cell.indices_of_cells_in_same_square).to eq []
 	end
 
