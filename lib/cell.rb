@@ -6,7 +6,7 @@ class Cell
 		@x_coordinate = x_coordinate
 	end
 
-	attr_accessor :value
+	attr_reader :value
 
 	def filled_out?
 		@value != 0
@@ -15,8 +15,9 @@ class Cell
 	def solve grid_object
     unless filled_out?
 			grid = get_grid_from grid_object
-    # request the list of candidates and 
-    # get a new value if there's only one possible candidate
+			if only_one_candidate? grid
+    		@value = candidates(grid).pop
+    	end
   	end
 	end
 

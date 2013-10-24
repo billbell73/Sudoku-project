@@ -112,7 +112,7 @@ describe Cell do
 		expect(solved_cell.solve grid_object).to eq nil
 	end
 
-	xit 'will assign new value to cell if only one candidate for poss values' do
+	it 'will assign new value to cell if only one candidate for poss values' do
 		cell = Cell.new(0,2,0)
 		grid_object = double :grid_object, cells: [[9,0,5,0],[3,4,6,1],[0,8,0,2],[7,1,0,0]]
 		cell.solve grid_object
