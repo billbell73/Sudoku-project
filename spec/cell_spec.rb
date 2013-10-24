@@ -25,7 +25,7 @@ describe Cell do
 		expect(cell.get_values_of_neighbours_from grid).to be_instance_of Array
 	end
 
-	it 'can get the full grid' do
+	xit 'can get the full grid' do
 		expect(grid).to receive(:cells)
 		cell.get_grid_from grid
 	end
@@ -107,15 +107,22 @@ describe Cell do
 		expect(cell.clean_up values).to eq [6,7,8]
 	end
 
-	it 'will do nothing if cell solved' do
+	xit 'will do nothing if cell solved' do
 		grid_object = double :grid_object
 		expect(solved_cell.solve grid_object).to eq nil
 	end
 
-	it 'will assign new value to cell if only one candidate for poss values' do
+	xit 'will assign new value to cell if only one candidate for poss values' do
 		cell = Cell.new(0,2,0)
 		grid_object = double :grid_object, cells: [[9,0,5,0],[3,4,6,1],[0,8,0,2],[7,1,0,0]]
 		cell.solve grid_object
+		expect(cell.value).to eq 1
+	end
+
+	xit 'will assign new value to cell if only one candidate for poss values' do
+		cell = Cell.new(0,2,0)
+		grid = [[9,0,5,0],[3,4,6,1],[0,8,0,2],[7,1,0,0]]
+		cell.solve grid
 		expect(cell.value).to eq 1
 	end
 

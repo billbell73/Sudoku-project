@@ -12,18 +12,28 @@ class Cell
 		@value != 0
 	end
 
-	def solve grid_object
+	# def solve grid_object
+ #    unless filled_out?
+	# 		grid = get_grid_from grid_object
+	# 		if only_one_candidate? grid
+ #    		@value = candidates(grid).pop
+ #    	end
+ #  	end
+	# end
+
+	def solve grid_object, new_grid
     unless filled_out?
-			grid = get_grid_from grid_object
-			if only_one_candidate? grid
-    		@value = candidates(grid).pop
+			# grid = get_grid_from grid_object
+			if only_one_candidate? new_grid
+    		@value = candidates(new_grid).first
+    		grid_object.grid[@y_coordinate][@x_coordinate] = candidates(new_grid).first
     	end
   	end
 	end
 
-	def get_grid_from grid_object
-		grid_object.cells
-	end
+	# def get_grid_from grid_object
+	# 	grid_object.cells
+	# end
 
 	def candidates grid
 		# grid = get_grid_from grid_object
