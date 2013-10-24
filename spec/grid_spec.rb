@@ -6,9 +6,16 @@ describe Grid do
 	let(:puzzle) { '015003002000100906270068430490002017501040380003905000900081040860070025037204600' }
   let(:grid) { Grid.new(puzzle) }
 
+  it 'can take in 81 character string and create 9x9 Array' do
+  	expect(grid.create_grid_from(puzzle)[0][1]).to eq 1
+  end
+
 	context "initialization" do
     
-    xit 'should have 81 cells' do
+    it 'should have 81 cells' do
+    	grid_object = Grid.new(puzzle)
+    	new_grid = grid_object.create_grid_from(puzzle)
+    	expect(grid_object.cells.length).to eq 81
     end
 
     xit 'should have an unsolved first cell' do
@@ -17,10 +24,17 @@ describe Grid do
     xit 'should have a solved second cells with value 1' do
     end
 
+    xit 'can see Cell class' do
+
+    end
+
   end
 
 
   context "solving sudoku" do
+
+  	it 'can ask a cell to solve itself' do
+  	end
 
 		xit "can solve the puzzle" do
       expect(grid.solved?).to be_false

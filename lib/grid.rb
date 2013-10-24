@@ -1,24 +1,40 @@
+require_relative 'cell'
+
 class Grid
 
-attr_reader :cells
+	attr_reader :cells
 
 	@@cell_refs = []
 
 
 	def initialize(initial_values)
-		@cells = # generate 81 cells...
-		@initial_values = initial_values
+		@grid = create_grid_from initial_values
+		@cells = []
+		create_cells_from @grid
   end
 
   
 
-  def array_creator
-  	# takes in string and returns 9x9 array
+  def create_grid_from puzzle
+  	counter = 0
+  	grid = Array.new(9) { Array.new(9) }
+		(0..8).each do | y_coordinate |
+			(0..8).each do | x_coordinate |
+				grid[y_coordinate][x_coordinate] = puzzle[counter].to_i
+				counter += 1
+			end
+		end
+		grid
   end
 
-  def cell_creator grid
-  	# takes in string and creates cells with value and coord
-  	# and returns ref to class variable? Instance variable?
+  def create_cells_from grid
+  	(0..8).each do | y_coordinate |
+			(0..8).each do | x_coordinate |
+				value = @grid[y_coordinate][x_coordinate]
+				new_cell = Cell.new(value, [y_coordinate],[x_coordinate])
+				@cells << new_cell#.dup
+			end
+		end
   end
 
   def solve
@@ -32,7 +48,7 @@ attr_reader :cells
   end
 
   def try_to_solve
-  	# ask each cell to solve itself
+  	#
   end
 
   def solved?
