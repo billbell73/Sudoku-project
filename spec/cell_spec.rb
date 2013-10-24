@@ -3,11 +3,17 @@ require 'cell'
 
 describe Cell do
 	let(:cell) { Cell.new(0,0,0) }
+
+	let(:solved_cell) { Cell.new(3,0,0) }
 	
 	let(:grid) { double :grid }
 
+	it 'knows if it\'s not filled out' do
+		expect(cell.filled_out?).to be_false
+	end
+
 	it 'knows if it\'s filled out' do
-		expect(cell.filled_out?).to be_true
+		expect(solved_cell.filled_out?).to be_true
 	end
 
 	xit 'can tell candidate numbers when empty' do
@@ -86,20 +92,41 @@ describe Cell do
 	end
 
 	it 'can tell candidate values' do
-		grid_object = double :grid, cells: [[0,0,1,9],[2,3,4,7],[5,0,0,8]]
-		expect(cell.candidates grid_object).to eq [6,7,8]
+		grid = [[0,0,1,9],[2,3,4,7],[5,0,0,8]]
+		expect(cell.candidates grid).to eq [6,7,8]
 	end
 
 	it 'can tell candidate values, different example' do
 		cell = Cell.new(0,2,0)
-		grid_object = double :grid, cells: [[5,3,2],[0,0,1],[0,6,0],[3,7,8]]
-		expect(cell.candidates grid_object).to eq [4,7,8,9]
+		grid = [[5,3,2],[0,0,1],[0,6,0],[3,7,8]]
+		expect(cell.candidates grid).to eq [4,7,8,9]
 	end
 
 	it 'cleans up array by removing zeros and duplicates' do
 		values = [0,0,0,6,6,7,8,8]
 		expect(cell.clean_up values).to eq [6,7,8]
 	end
+
+	it 'will do nothing if cell solved' do
+		grid_object = double :grid_object
+		expect(solved_cell.solve grid_object).to eq nil
+	end
+
+	xit 'will assign new value to cell if only one candidate for poss values' do
+		cell = Cell.new(0,2,0)
+		grid_object = double :grid_object, cells: [[9,0,5,0],[3,4,6,1],[0,8,0,2],[7,1,0,0]]
+		cell.solve grid_object
+		expect(cell.value).to eq 1
+	end
+
+	it 'can tell if there is only one candidate value for a cell' do
+		cell = Cell.new(0,2,0)
+		grid = [[9,0,5,0],[3,4,6,1],[0,8,0,2],[7,1,0,0]]
+		expect(cell.only_one_candidate? grid).to be_true
+	end
+
+
+
 
 ###
 

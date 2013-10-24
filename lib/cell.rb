@@ -6,18 +6,32 @@ class Cell
 		@x_coordinate = x_coordinate
 	end
 
+	attr_accessor :value
+
 	def filled_out?
-		@value
+		@value != 0
 	end
 
-	def candidates grid_object
-		grid = get_grid_from grid_object
-		neighbours_values = get_values_of_neighbours_from grid
-		(1..9).to_a - neighbours_values
+	def solve grid_object
+    unless filled_out?
+			grid = get_grid_from grid_object
+    # request the list of candidates and 
+    # get a new value if there's only one possible candidate
+  	end
 	end
 
 	def get_grid_from grid_object
 		grid_object.cells
+	end
+
+	def candidates grid
+		# grid = get_grid_from grid_object
+		neighbours_values = get_values_of_neighbours_from grid
+		(1..9).to_a - neighbours_values
+	end
+
+	def only_one_candidate? grid
+		candidates(grid).length == 1
 	end
 
 	def get_values_of_neighbours_from grid
